@@ -1,0 +1,16 @@
+
+table{
+    width: 100%;
+}
+#status-icon{
+    font-size: 10px;
+}
+.green-icon{
+    color: #2ECC71;
+}
+.yellow-icon{
+    color: #F1C40F;
+}
+.red-icon{
+    color: #E74C3C;
+}

@@ -1,0 +1,33 @@
+
+<h2 mat-dialog-title>{{ (userID == 0) ? 'Add User' : 'Update User' }}</h2>
+
+<mat-dialog-content [formGroup]="userForm">
+
+    <mat-form-field class="user-form-field">
+        <input type="text" matInput placeholder="Name" formControlName="name">
+    </mat-form-field>
+    <br>
+
+    <mat-form-field class="user-form-field">
+        <input type="email" matInput placeholder="Email" formControlName="emailID">
+    </mat-form-field>
+    <br>
+
+    <mat-radio-group aria-label="Select Role" formControlName="isAdmin">
+        <mat-radio-button [value]="true">Admin</mat-radio-button>
+        <mat-radio-button [value]="false">Customer Executive</mat-radio-button>
+    </mat-radio-group>
+    <br>
+
+    <mat-form-field class="user-form-field">
+        <input type="tel" matInput placeholder="Mobile Number (Optional)" formControlName="mobileNumber">
+    </mat-form-field>
+
+
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button [disabled]="!userForm.valid" class="save-user-btn" mat-raised-button color="primary" (click)="saveUpdateUser()">
+        {{ (userID == 0) ? 'Add User' : 'Update User' }}
+    </button>
+</mat-dialog-actions>
