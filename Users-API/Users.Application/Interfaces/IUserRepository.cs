@@ -12,5 +12,6 @@ namespace Users.Application.Interfaces
         List<Domain.User.User> GetUsers();
         void AddUser(Domain.User.User user);
         bool UpdateUser(int userID, Domain.User.User newUser);
+        bool DeleteUser(int userID);
     }
 }

@@ -7,6 +7,7 @@ import { AddUpdateUserComponent } from './addupdate-user.component';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { ConfirmDialogComponent } from '../shared/confirm-dialog.component';
 
 @Component({
   selector: 'app-users-list',
@@ -30,6 +31,7 @@ export class UsersListComponent implements OnInit {
   constructor(private usersService: UsersService, 
               private dialog: MatDialog,
               private dialogRef: MatDialogRef<AddUpdateUserComponent>,
+              private confirmDialogRef: MatDialogRef<ConfirmDialogComponent>,
               private snackbar: MatSnackBar) { }
 
   ngOnInit(): void {
@@ -98,9 +100,66 @@ export class UsersListComponent implements OnInit {
 
   }
 
+  confirmDeleteDialog(userID: number)
+  {
+    // console.log("Open Confirm Delete: ", userID);
+
+    this.confirmDialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: "Confirm Delete",
+        content: "Are you sure you want to delete the user?"
+      }
+    });
+
+    // On Confirm
+    this.confirmDialogRef.afterClosed().subscribe(
+      (confirmResult) => {
+        if(confirmResult == true){
+          this.deleteUser(userID);
+        }
+      }
+    );
+
+  }
+
+  deleteUser(userID: number)
+  {
+    // console.log("Delete Started: ", userID);
+    
+    this.usersService.deleteUser(userID).subscribe(
+      (data) => {
+        this.successSnackbar(data.toString());
+        // Refresh Users List after Deletion
+        this.getUsersList();
+      },
+      (error) => {
+        this.errorSnackbar("Oops! Something went wrong");
+        console.log("Error in User Deletion: ", error);
+      }
+    );
+  }
+
   filterUsers(filterValue: string)
   {
     this.usersDataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  successSnackbar(message: string)
+  {
+    this.snackbar.open(message, "Got it", {
+      duration: 3000,
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition
+    });
+  }
+
+  errorSnackbar(message: string)
+  {
+    this.snackbar.open(message, "Dismiss", {
+      duration: 3000,
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition
+    });
   }
 
 }

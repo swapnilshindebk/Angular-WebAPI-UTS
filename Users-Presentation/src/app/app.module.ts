@@ -27,6 +27,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { ConfirmDialogComponent } from './shared/confirm-dialog.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     UsersListComponent,
     HeaderComponent,
     FooterComponent,
-    AddUpdateUserComponent
+    AddUpdateUserComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +51,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatSnackBarModule, MatTableModule, MatDialogModule, MatIconModule,
     MatToolbarModule, MatRadioModule, MatSortModule, MatPaginatorModule
   ],
-  entryComponents: [AddUpdateUserComponent],
+  entryComponents: [AddUpdateUserComponent, ConfirmDialogComponent],
   providers: [UsersService, 
     {
       provide: MatDialogRef,

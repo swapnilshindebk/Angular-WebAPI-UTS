@@ -26,4 +26,9 @@ export class UsersService {
     return this.httpClient.put(this.baseAPIURL+ userID, newUser );
   }
 
+  deleteUser(userID: number)
+  {
+    return this.httpClient.delete(this.baseAPIURL+ userID);
+  }
+
 }

@@ -52,5 +52,17 @@ namespace Users.Application.User
             }
         }
 
+        public bool DeleteUser(int userID)
+        {
+            try
+            {
+                return _userRepository.DeleteUser(userID);
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
+        }
+
     }
 }

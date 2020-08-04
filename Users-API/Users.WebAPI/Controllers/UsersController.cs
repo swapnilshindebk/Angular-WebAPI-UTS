@@ -74,5 +74,25 @@ namespace Users.WebAPI.Controllers
             }
         }
 
+        [HttpDelete]
+        public IHttpActionResult DeleteUser(int id)
+        {
+            if (id == 0)
+                return BadRequest("Invalid User ID");
+
+            try
+            {
+                bool isDeleted = _usersBLL.DeleteUser(id);
+                if (isDeleted == true)
+                    return Ok("User Deleted Successfully!");
+                else
+                    return NotFound();
+            }
+            catch (Exception exception)
+            {
+                return BadRequest(exception.Message);
+            }
+        }
+
     }
 }

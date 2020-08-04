@@ -70,5 +70,25 @@ namespace Users.Data.User
                 throw exception;
             }
         }
+
+        public bool DeleteUser(int userID)
+        {
+            try
+            {
+                var userToDelete = _appDbContext.Users.FirstOrDefault(user => user.UserID == userID);
+
+                if (userToDelete == null)
+                    return false;
+
+                _appDbContext.Users.Remove(userToDelete);
+                _appDbContext.SaveChanges();
+
+                return true;
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
+        }
     }
 }
